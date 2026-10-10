@@ -1,0 +1,2 @@
+class JoJoClass():
+	pass

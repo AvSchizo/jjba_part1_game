@@ -13,7 +13,6 @@ from savePreferences import savePreferences
 # default preferences here
 defaultPreferences = {
 	"screenSizeScale": 1,
-	"playerWithControllerPriority": 1,
 	"webMode": False,
 	"maxFPS": 75,
 	"collisionDrawing": {
@@ -51,6 +50,14 @@ screen = pygame.display.set_mode((preferences["screenSizeScale"]*gs["spacetimeSi
 
 
 
+#
+# load JoJos
+#
+from JoJoClassesImport import bigList as jojoList
+
+
+
+
 
 def load_movementTest():
 	pass
@@ -66,3 +73,31 @@ def mainLoop():
 
 	if gs["gameState"] == 200:
 		pass
+
+
+
+
+
+
+def renderAll():
+
+	# sum sum
+
+
+
+	pygame.display.update()
+
+
+
+
+
+
+if __name__ != "__main__":
+	quit()
+
+while gs["running"]:
+
+	for event in pygame.event.get():
+
+		if event.type == pygame.QUIT:
+			quit()
