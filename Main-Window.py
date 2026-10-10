@@ -45,7 +45,12 @@ gs = {
 	"spacetimeSize": [1600, 900],
 }
 
-screen = pygame.display.set_mode((preferences["screenSizeScale"]*gs["spacetimeSize"][0], preferences["screenSizeScale"]*gs["spacetimeSize"][1]))
+gs["screen"] = pygame.display.set_mode((preferences["screenSizeScale"]*gs["spacetimeSize"][0], preferences["screenSizeScale"]*gs["spacetimeSize"][1]))
+
+
+# camera
+from cameraClass import cameraClass
+gs["camera"] = cameraClass()
 
 
 
@@ -54,6 +59,7 @@ screen = pygame.display.set_mode((preferences["screenSizeScale"]*gs["spacetimeSi
 # load JoJos
 #
 from JoJoClassesImport import bigList as jojoList
+gs["jojo"] = jojoList[1]()
 
 
 
@@ -66,6 +72,7 @@ def load_movementTest():
 
 
 
+##########################
 def mainLoop():
 
 	gs["currentFrame"] += 1
@@ -74,18 +81,22 @@ def mainLoop():
 	if gs["gameState"] == 200:
 		pass
 
+##########################
 
 
 
 
 
+##########################
 def renderAll():
 
-	# sum sum
+	gs["jojo"].draw(gs)
 
 
 
 	pygame.display.update()
+
+##########################
 
 
 
@@ -101,3 +112,19 @@ while gs["running"]:
 
 		if event.type == pygame.QUIT:
 			quit()
+
+
+
+
+	mainLoop()
+
+
+
+
+
+	renderAll()
+
+
+
+
+	clock.tick(preferences["maxFPS"])

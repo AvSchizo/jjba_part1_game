@@ -1,6 +1,8 @@
 import pygame
 pygame.init()
 
+import json
+
 class baseJoJoClass():
 
 	def __init__(self):
@@ -46,3 +48,50 @@ class baseJoJoClass():
 			return returningList
 		else:
 			self.buttonsPressed = returningList
+
+
+
+	def getSprite(self):
+
+		returnSprites = []
+
+		image = pygame.surface.Surface((100, 100))
+		image.fill("blue")
+		offset = [0, 0]
+		returnSprites.append([image, offset])
+
+		return returnSprites
+
+
+	def draw(self, stuff):
+
+		class tempCamClass():
+
+			pos = [0, 0]
+
+			def getScaling(self):
+
+				return 1
+			
+
+		cam = stuff["camera"]
+		scrn = stuff["screen"]
+
+
+		with open("preferences.json", "r") as f:
+			prefs = json.load(f)		
+		scaling = cam.getScaling()*prefs["screenSizeScale"]
+
+		for pack in self.getSprite():
+
+			image = pack[0]
+			image = pygame.transform.scale(image, (image.get_width()*scaling, image.get_height()*scaling))
+
+			start = [
+				scrn.get_width(),
+				scrn.get_height()
+			]
+			for i in range(2):
+				start[i] = start[i] + (cam.pos[i]-self.pos[i]+pack[1][i])*scaling
+
+			scrn.blit(image, start)
