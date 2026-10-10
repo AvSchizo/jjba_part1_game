@@ -90,7 +90,10 @@ def mainLoop():
 ##########################
 def renderAll():
 
+	gs["screen"].fill("lavender")
+
 	gs["jojo"].draw(gs)
+
 
 
 

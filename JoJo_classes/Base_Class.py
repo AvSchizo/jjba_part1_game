@@ -88,10 +88,11 @@ class baseJoJoClass():
 			image = pygame.transform.scale(image, (image.get_width()*scaling, image.get_height()*scaling))
 
 			start = [
-				scrn.get_width(),
-				scrn.get_height()
+				scrn.get_width()/2,
+				scrn.get_height()/2
 			]
 			for i in range(2):
 				start[i] = start[i] + (cam.pos[i]-self.pos[i]+pack[1][i])*scaling
+			rect = image.get_rect(center=start)
 
-			scrn.blit(image, start)
+			scrn.blit(image, rect)
