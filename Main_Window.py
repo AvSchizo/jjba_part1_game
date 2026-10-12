@@ -25,7 +25,6 @@ verifyPreferences(defaultPreferences)
 
 with open("preferences.json", "r") as f:
 	preferences = json.load(f)
-print(preferences)
 
 
 
