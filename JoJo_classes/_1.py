@@ -19,8 +19,13 @@ class JoJoClass(baseJoJoClass):
 		inputs = self.totalInputs[self.bg["currentFrame"]-1]
 
 		speed = 5
+		deceleration = 10
+		maxSpeed = 30
 		self.velocities["self"][0] = inputs[0]*speed
 		self.velocities["self"][1] = inputs[1]*speed
+		for i in range(2):
+			if inputs[i] != 0:
+				pass
 
 		# moving
 		for key in self.velocities.keys():

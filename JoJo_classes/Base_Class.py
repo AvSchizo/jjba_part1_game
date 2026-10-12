@@ -24,6 +24,20 @@ class baseJoJoClass():
 
 		self.totalInputs = inputs
 
+		self.direction = 1
+		self.stun = 0
+
+
+
+	def moveForVel(self, distance, direction):
+		rep = abs(round(distance))
+		for i in range(reps):
+			lastPos = self.pos[direction]
+			self.pos[direction] += round(distance)/reps
+			if self.touchingMapGeo():
+				self.pos[direction] = lastPos
+				self.velocities["self"][direction] = 0
+
 
 
 	def convertInputs(self, returning=False):
@@ -70,7 +84,7 @@ class baseJoJoClass():
 
 		returnSprites = []
 
-		image = pygame.surface.Surface((100, 100))
+		image = pygame.surface.Surface((25, 50))
 		image.fill("blue")
 		offset = [0, 0]
 		returnSprites.append([image, offset])

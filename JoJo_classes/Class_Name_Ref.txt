@@ -1,1 +1,1 @@
-No collision, pretty much a test for rudimentary inputs
+Water level. A lot like Donkey Kong Country water levels.
