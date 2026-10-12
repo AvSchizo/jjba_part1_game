@@ -117,6 +117,9 @@ if __name__ != "__main__":
 
 load_movementTestLevel()
 
+
+timeGrotched = 0
+lastGrotch = pygame.time.get_ticks()
 while gs["running"]:
 
 	for event in pygame.event.get():
@@ -126,8 +129,11 @@ while gs["running"]:
 
 
 
-
-	mainLoop()
+	timeGrotched += pygame.time.get_ticks()-lastGrotch
+	lastGrotch = pygame.time.get_ticks()
+	for i in range(int(timeGrotched/(1000/gs["tickRate"]))):
+		timeGrotched -= 1000/gs["tickRate"]
+		mainLoop()
 
 
 
