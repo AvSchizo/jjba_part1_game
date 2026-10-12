@@ -20,7 +20,3 @@ def verifyPreferences(default):
 	with open("preferences.json", "w") as f:
 		json.dump(blankDict, f, indent="\t")
 
-
-
-if __name__ == "__main__":
-	verifyPreferences({})
