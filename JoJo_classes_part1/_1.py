@@ -1,4 +1,4 @@
-from JoJo_classes.Base_Class import baseJoJoClass
+from JoJo_classes_part1.Base_Class import baseJoJoClass
 
 class JoJoClass(baseJoJoClass):
 
