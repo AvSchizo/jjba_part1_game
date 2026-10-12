@@ -18,9 +18,18 @@ class JoJoClass(baseJoJoClass):
 
 		inputs = self.totalInputs[self.bg["currentFrame"]-1]
 
-		acceleration = 5
-		deceleration = 10
-		maxSpeed = 30
+		acceleration = 1
+		deceleration = [
+			# 0: additive, 1: multiplicitive
+			1,
+			# additive deceleration
+			4,
+			# multiplicitive deceleration
+			0.75,
+			# multiplicitive deceleration threshold
+			1,
+		]
+		maxSpeed = 10
 		for i in range(2):
 			# acceleration
 			if inputs[i] != 0:
@@ -32,13 +41,22 @@ class JoJoClass(baseJoJoClass):
 					self.velocities["self"][i] += dist
 			# deceleration
 			else:
-				if abs(self.velocities["self"][i]) > deceleration:
-					self.velocities["self"][i] += inputs[i]*deceleration
-				else:
-					self.velocities["self"][i] = 0
+				eeg = self.velocities["self"][i]
+				# additive
+				if deceleration[0] == 0:
+					if abs(eeg) > deceleration[1]:
+						self.velocities["self"][i] += (eeg/abs(eeg))*-1*deceleration[1]
+					else:
+						self.velocities["self"][i] = 0
+				# multiplicitive
+				elif deceleration[0] == 1:
+					if abs(eeg) > deceleration[3]:
+						self.velocities["self"][i] *= deceleration[2]
+					else:
+						self.velocities["self"][i] = 0
 
 		# moving
 		for key in self.velocities.keys():
 			vel = self.velocities[key]
 			for i in range(2):
-				self.pos[i] += vel[i]
+				self.pos[i] += round(vel[i])
