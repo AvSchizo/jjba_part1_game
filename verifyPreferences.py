@@ -10,7 +10,7 @@ def verifyPreferences(default):
 	try:
 		with open("preferences.json", "r") as f:
 			prefDict = json.load(f)
-	except:
+	except FileNotFoundError:
 		prefDict = {}
 
 	for key in prefDict.keys():
@@ -19,4 +19,3 @@ def verifyPreferences(default):
 
 	with open("preferences.json", "w") as f:
 		json.dump(blankDict, f, indent="\t")
-
