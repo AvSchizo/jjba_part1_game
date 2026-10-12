@@ -5,7 +5,9 @@ import json
 
 class baseJoJoClass():
 
-	def __init__(self):
+	def __init__(self, globals, inputs=[]):
+
+		self.bg = globals
 
 		self.pos = [0, 0]
 
@@ -14,21 +16,34 @@ class baseJoJoClass():
 		}
 
 		self.inputButtons = {
+			"right": pygame.K_RIGHT,
+			"left": pygame.K_LEFT,
 			"up": pygame.K_UP,
 			"down": pygame.K_DOWN,
-			"left": pygame.K_LEFT,
-			"right": pygame.K_RIGHT,
 		}
 
-		self.inputs = []
-		self.buttonsPressed = []
-		for i in range(8):
-			self.buttonsPressed.append(0)
+		self.totalInputs = inputs
 
 
 
 	def convertInputs(self, returning=False):
-		pass
+
+		allKeysPressed = pygame.key.get_pressed()
+		keysPressed = []
+		for act in [self.inputButtons[key] for key in self.inputButtons.keys()]:
+			keysPressed.append(allKeysPressed[act])
+
+		inputs = []
+
+		# vertical
+		inputs.append(keysPressed[0]-keysPressed[1])
+		# horizontal
+		inputs.append(keysPressed[2]-keysPressed[3])
+
+		if returning:
+			return inputs
+		elif len(self.totalInputs) < self.bg["currentFrame"]:
+			self.totalInputs.append(inputs)
 
 
 
@@ -91,8 +106,8 @@ class baseJoJoClass():
 				scrn.get_width()/2,
 				scrn.get_height()/2
 			]
-			for i in range(2):
-				start[i] = start[i] + (cam.pos[i]-self.pos[i]+pack[1][i])*scaling
+			start[0] += (self.pos[0]-cam.pos[0]+pack[1][0])*scaling
+			start[1] -= (self.pos[1]-cam.pos[1]+pack[1][1])*scaling
 			rect = image.get_rect(center=start)
 
 			scrn.blit(image, rect)

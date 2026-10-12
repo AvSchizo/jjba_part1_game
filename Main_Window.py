@@ -37,7 +37,7 @@ gs = {
 	"currentFrame": 0,
 	# if gameSate%100 == 0, that is a loading state, and will trigger the load function for whatever the hundreds place is
 	# so please change it to 100 for release
-	"gameState": 200,
+	"gameState": 100,
 	"substate": 0,
 	"tickRate": 60,
 	"FPS": 75,
@@ -59,14 +59,15 @@ gs["camera"] = cameraClass()
 # load JoJos
 #
 from JoJoClassesImport import bigList as jojoList
-gs["jojo"] = jojoList[1]()
 
 
 
 
 
-def load_movementTest():
-	pass
+def load_movementTestLevel():
+
+	gs["gameState"] = 101
+	gs["jojo"] = jojoList[1](gs)
 
 
 
@@ -78,8 +79,13 @@ def mainLoop():
 	gs["currentFrame"] += 1
 
 
-	if gs["gameState"] == 200:
-		pass
+	if round(gs["gameState"]/100) == 1:
+
+		if gs["gameState"] == 100:
+			load_movementTestLevel()
+
+		if gs["gameState"] == 101:
+			gs["jojo"].update()
 
 ##########################
 
@@ -108,6 +114,8 @@ def renderAll():
 
 if __name__ != "__main__":
 	quit()
+
+load_movementTestLevel()
 
 while gs["running"]:
 
