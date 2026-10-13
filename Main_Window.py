@@ -43,6 +43,7 @@ gs = {
 	"FPS": 75,
 	# you can get positions bigger than these, this just gives a reference for how to scale things
 	"spacetimeSize": [1600, 900],
+	"mapGeo" : [],
 }
 
 gs["screen"] = pygame.display.set_mode((preferences["screenSizeScale"]*gs["spacetimeSize"][0], preferences["screenSizeScale"]*gs["spacetimeSize"][1]))
@@ -58,7 +59,9 @@ gs["camera"] = cameraClass()
 #
 # load JoJos
 #
-from JoJoClassesImport import bigList as jojoList
+from JoJoClassesImport import bigList1 as part1List
+
+from loadMapGeo import loadMapGeo
 
 
 
@@ -67,7 +70,8 @@ from JoJoClassesImport import bigList as jojoList
 def load_movementTestLevel():
 
 	gs["gameState"] = 101
-	gs["jojo"] = jojoList[1](gs)
+	gs["jojo"] = part1List[1](gs)
+	gs["mapGeo"] = loadMapGeo("levels/water_level/Map_Geometry.txt")
 
 
 

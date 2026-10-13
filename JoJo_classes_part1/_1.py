@@ -18,7 +18,7 @@ class JoJoClass(baseJoJoClass):
 
 		inputs = self.totalInputs[self.bg["currentFrame"]-1]
 
-		acceleration = 1
+		acceleration = 2
 		deceleration = [
 			# 0: additive, 1: multiplicitive
 			1,
@@ -29,12 +29,12 @@ class JoJoClass(baseJoJoClass):
 			# multiplicitive deceleration threshold
 			1,
 		]
-		maxSpeed = 10
+		maxSpeed = 20
 		for i in range(2):
 			# acceleration
 			if inputs[i] != 0:
 				dist = inputs[i]*maxSpeed-self.velocities["self"][i]
-				if abs(dist) < acceleration:
+				if abs(dist) > acceleration:
 					self.velocities["self"][i] += inputs[i]*acceleration
 				# if on same side of zero
 				elif dist*inputs[i] > 0:

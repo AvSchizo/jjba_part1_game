@@ -84,12 +84,27 @@ class baseJoJoClass():
 
 		returnSprites = []
 
-		image = pygame.surface.Surface((25, 50))
+		image = pygame.surface.Surface((30, 50))
 		image.fill("blue")
 		offset = [0, 0]
 		returnSprites.append([image, offset])
 
 		return returnSprites
+
+
+
+	def getCollision(self, inPos=None):
+
+		if inPos == None:
+			pos = self.pos
+		else:
+			pos = inPos
+
+		return [
+			[pos[0]-15, pos[1]+25],
+			[pos[0]+15, pos[1]-25],
+		]
+
 
 
 	def draw(self, stuff):
