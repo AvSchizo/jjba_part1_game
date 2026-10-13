@@ -44,6 +44,7 @@ gs = {
 	# you can get positions bigger than these, this just gives a reference for how to scale things
 	"spacetimeSize": [1600, 900],
 	"mapGeo" : [],
+	"devConsoleActive" : False,
 }
 
 gs["screen"] = pygame.display.set_mode((preferences["screenSizeScale"]*gs["spacetimeSize"][0], preferences["screenSizeScale"]*gs["spacetimeSize"][1]))
